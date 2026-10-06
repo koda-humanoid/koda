@@ -1,0 +1,3 @@
+# Keep the original local cut outside the GitHub Pages payload (GitHub blocks files over 100 MB).
+assets/source.mp4
+.DS_Store
