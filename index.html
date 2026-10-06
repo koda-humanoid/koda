@@ -39,26 +39,6 @@
       --radius: 20px;
       --shadow: 0 20px 50px rgba(35, 17, 45, .15);
     }
-    body.theme-midnight {
-      --paper: #f5f1ff; --paper-2: #e4dcff; --ink: #1b1234; --muted: #665a80;
-      --line: rgba(27,18,52,.17); --accent: #8b5cf6; --accent-2: #46c8ff; --accent-soft: #e2d8ff;
-      --deep: #120c24; --deep-2: #28134d; --deep-3: #4a2394; --deep-4: #6c3bd4;
-      --hero-a: #0d0820; --hero-b: #211044; --hero-c: #42309a; --hero-glow: rgba(70,200,255,.36);
-      --hero-grid: rgba(255,255,255,.12); --hero-kicker: #cfc2ff; --hero-text: #e9e3ff; --hero-muted: #b8aee0;
-      --button-bg: #bfa7ff; --button-text: #1b1234; --text-soft: #4d4168; --note-border: #46c8ff;
-      --note-bg: rgba(70,200,255,.1); --dark-panel: #0f0920; --dark-text: #e9e3ff;
-      --shadow: 0 20px 50px rgba(37,18,87,.18);
-    }
-    body.theme-grape {
-      --paper: #f3eef7; --paper-2: #e8d8ef; --ink: #29172f; --muted: #756179;
-      --line: rgba(41,23,47,.16); --accent: #7b3fa0; --accent-2: #d85bb5; --accent-soft: #eedaf1;
-      --deep: #351542; --deep-2: #522061; --deep-3: #743286; --deep-4: #96499c;
-      --hero-a: #1b0d23; --hero-b: #351542; --hero-c: #7b3fa0; --hero-glow: rgba(216,91,181,.34);
-      --hero-grid: rgba(255,255,255,.1); --hero-kicker: #e8bfe5; --hero-text: #f4e3f4; --hero-muted: #cba9ca;
-      --button-bg: #f0c8e7; --button-text: #351542; --text-soft: #55405a; --note-border: #d85bb5;
-      --note-bg: rgba(216,91,181,.1); --dark-panel: #25102d; --dark-text: #f4e3f4;
-      --shadow: 0 20px 50px rgba(81,31,102,.15);
-    }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body { margin: 0; color: var(--ink); background: var(--paper); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; }
@@ -82,23 +62,25 @@
     .hero-top { display: flex; align-items: center; justify-content: center; gap: 24px; }
     .kicker, .eyebrow { color: var(--hero-kicker); font-size: .73rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
     .status { border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 7px 12px; color: var(--hero-text); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
-    .palette-switcher { display: inline-flex; align-items: center; gap: 6px; padding: 4px 7px; border: 1px solid rgba(255,255,255,.24); border-radius: 999px; color: var(--hero-muted); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
-    .palette-switcher a { display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; color: var(--hero-text); font-weight: 800; }
-    .palette-switcher a:hover, .palette-switcher a.active { color: var(--button-text); border-color: var(--button-bg); background: var(--button-bg); }
     .hero h1 { margin: 30px 0 14px; font-size: clamp(5rem, 15vw, 10.5rem); line-height: .8; letter-spacing: -.085em; font-weight: 850; }
     .subtitle { max-width: 820px; margin: 0 auto; color: var(--hero-text); font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.25rem, 2.4vw, 2rem); line-height: 1.22; }
-    .authors { margin: 28px 0 0; color: var(--hero-muted); font-size: .95rem; }
-    .authors strong { color: var(--white); font-weight: 700; }
-    .affiliations { margin-top: 8px; color: var(--hero-muted); font-size: .8rem; }
+    .authors { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 12px 28px; margin: 30px 0 0; color: var(--white); font-size: 1.08rem; }
+    .author { display: inline-block; white-space: nowrap; }
+    .author-name { font-weight: 500; }
+    .authors sup, .affiliations sup { position: relative; top: -.45em; vertical-align: baseline; font-size: .7em; line-height: 0; }
+    .authors sup { margin-left: 2px; color: var(--hero-kicker); }
+    .affiliations { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; margin: 14px 0 0; color: var(--hero-muted); font-size: .88rem; }
+    .affiliation { white-space: nowrap; }
+    .affiliations sup { margin-right: 4px; }
     .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 30px; }
     .button { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 0 17px; border: 1px solid rgba(255,255,255,.4); border-radius: 999px; color: var(--white); font-size: .83rem; font-weight: 700; transition: transform .2s ease, background .2s ease; }
     .button:hover { transform: translateY(-2px); background: rgba(255,255,255,.12); }
     .button.primary { border-color: var(--button-bg); background: var(--button-bg); color: var(--button-text); }
     .institution-row { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 48px; }
-    .logo-card { display: flex; align-items: center; justify-content: center; min-height: 62px; padding: 10px 15px; border: 1px solid rgba(255,255,255,.22); border-radius: 12px; background: rgba(255,255,255,.94); }
+    .logo-card { display: flex; align-items: center; justify-content: center; height: 72px; min-height: 0; padding: 8px 15px; border: 1px solid rgba(255,255,255,.22); border-radius: 12px; background: rgba(255,255,255,.94); }
     .logo-card.gamma { width: 180px; }
     .logo-card.teleai { width: 64px; padding: 8px; }
-    .logo-card.gamma img { width: 100%; height: auto; }
+    .logo-card.gamma img { width: auto; max-width: 100%; height: 44px; object-fit: contain; }
     .logo-card.teleai img { width: 44px; height: 44px; object-fit: contain; }
     main { overflow: hidden; }
     .section { padding: 108px 0; border-bottom: 1px solid var(--line); }
@@ -189,14 +171,29 @@
   </header>
 
   <div id="top" class="hero">
-    <div class="hero-media"><div class="hero-video"><video autoplay muted loop playsinline preload="metadata" poster="assets/hero_generated.png" aria-label="KODA paired demonstration"><source src="assets/koda-data/task_3.mp4" type="video/mp4">Your browser does not support the video tag.</video><span class="hero-video-label">TEASER · KODA DATA</span></div></div>
+    <div class="hero-media"><div class="hero-video"><video autoplay muted loop playsinline preload="metadata" aria-label="KODA paired demonstration"><source src="assets/koda-data/task_3.mp4" type="video/mp4">Your browser does not support the video tag.</video><span class="hero-video-label">TEASER · KODA DATA</span></div></div>
     <div class="hero-inner wrap">
-      <div class="hero-top"><div class="kicker">Project page · 2026</div><div class="palette-switcher" aria-label="Choose palette"><span>Palette</span><a href="?theme=editorial" data-theme="editorial" title="Editorial purple">A</a><a href="?theme=midnight" data-theme="midnight" title="Midnight purple">B</a><a href="?theme=grape" data-theme="grape" title="Grape purple">C</a></div><div class="status">GitHub Pages ready</div></div>
+      <!-- <div class="hero-top"><div class="kicker">Project page · 2026</div><div class="status">GitHub Pages ready</div></div> -->
       <h1>KODA</h1>
       <p class="subtitle">Kinematics–Observation Data Alignment for Humanoid Learning from Human Egocentric Demonstration</p>
-      <p class="authors"><strong>Shi Jiyuan</strong> · <strong>KODA Team</strong></p>
-      <p class="affiliations">Gamma Robotics · TeleAI &nbsp;·&nbsp; Project overview and data release preview</p>
-      <div class="hero-actions"><a class="button primary" href="#abstract">Explore the project ↓</a><a class="button" href="#results">Video ↗</a><a class="button" href="https://github.com/koda-humanoid/koda" target="_blank" rel="noreferrer">Code ↗</a><a class="button" href="#dataset">Data pipeline ↗</a><a class="button" href="#citation">Citation ↗</a></div>
+      <!-- Placeholder authors and affiliation assignments; replace once the author list is confirmed. -->
+      <p class="authors" aria-label="Authors">
+        <span class="author"><span class="author-name">Author 1</span><sup aria-label="Affiliations 1 and 2">1,2</sup></span>
+        <span class="author"><span class="author-name">Author 2</span><sup aria-label="Affiliation 1">1</sup></span>
+        <span class="author"><span class="author-name">Author 3</span><sup aria-label="Affiliation 2">2</sup></span>
+      </p>
+      <p class="affiliations" aria-label="Author affiliations">
+        <span class="affiliation"><sup>1</sup>Gamma Robotics</span>
+        <span class="affiliation"><sup>2</sup>TeleAI</span>
+      </p>
+      <div class="hero-actions">
+        <!-- <a class="button primary" href="#abstract">Explore the project ↓</a> -->
+        <!-- <a class="button" href="#results">Video ↗</a> -->
+        <a class="button" href="#">Video</a>
+        <a class="button" href="#">Code</a>
+        <a class="button" href="#">Paper</a>
+        <a class="button" href="#">Arxiv</a>
+      </div>
       <div class="institution-row" aria-label="Affiliations"><div class="logo-card gamma"><img src="assets/gamma.png" alt="Gamma Robotics"></div><div class="logo-card teleai"><img src="assets/teleai.png" alt="TeleAI"></div></div>
     </div>
   </div>
@@ -222,7 +219,7 @@
     <section id="results" class="section reveal">
       <div class="section-head wrap"><div class="eyebrow">03 / Results</div><h2>Browse the same task from human intent to robot execution.</h2></div>
       <div class="wrap"><p class="lead">The clips below use the KODA data material from the project workspace. Each demo shows a paired human view and a robot-side execution or replay across the four G1 tasks evaluated with SONIC and HEFT.</p>
-        <div class="media-frame"><video controls preload="metadata" poster="assets/hero_generated.png"><source src="assets/koda-data/task_3.mp4" type="video/mp4">Your browser does not support the video tag.</video><div class="media-caption"><span>KODA · featured paired demonstration</span><span>11.3 s · 1920 × 1080</span></div></div>
+        <div class="media-frame"><video controls preload="metadata"><source src="assets/koda-data/task_3.mp4" type="video/mp4">Your browser does not support the video tag.</video><div class="media-caption"><span>KODA · featured paired demonstration</span><span>11.3 s · 1920 × 1080</span></div></div>
         <div class="demo-toolbar"><div class="filters" role="group" aria-label="Filter demos"><button class="filter active" data-filter="all">All 4</button><button class="filter" data-filter="manipulation">Manipulation</button><button class="filter" data-filter="transfer">Transfer</button></div><span class="demo-count" id="demo-count">Showing 4 demonstrations</span></div>
         <div class="video-grid" id="demo-grid"><article class="video-card" data-kind="manipulation"><video controls muted loop preload="metadata"><source src="assets/koda-data/task_1.mp4" type="video/mp4"></video><div class="video-card-body"><h3>Task 01 · Pick and place</h3><p>Egocentric intent aligned with a whole-body reach and place.</p></div></article><article class="video-card" data-kind="transfer"><video controls muted loop preload="metadata"><source src="assets/koda-data/task_2.mp4" type="video/mp4"></video><div class="video-card-body"><h3>Task 02 · Container transfer</h3><p>Object transfer with synchronized hand and robot views.</p></div></article><article class="video-card" data-kind="manipulation"><video controls muted loop preload="metadata"><source src="assets/koda-data/task_3.mp4" type="video/mp4"></video><div class="video-card-body"><h3>Task 03 · Surface interaction</h3><p>Contact-rich action grounded in a controller-compatible trajectory.</p></div></article><article class="video-card" data-kind="transfer"><video controls muted loop preload="metadata"><source src="assets/koda-data/task_4.mp4" type="video/mp4"></video><div class="video-card-body"><h3>Task 04 · Rearrangement</h3><p>Multi-step rearrangement with the task instruction retained.</p></div></article></div>
       </div>
@@ -245,11 +242,6 @@
 
   <footer><div class="wrap"><span>KODA project page · GitHub Pages</span><span>Gamma Robotics × TeleAI</span></div></footer>
   <script>
-    const requestedTheme = new URLSearchParams(window.location.search).get('theme');
-    const theme = ['editorial', 'midnight', 'grape'].includes(requestedTheme) ? requestedTheme : 'editorial';
-    document.body.classList.toggle('theme-midnight', theme === 'midnight');
-    document.body.classList.toggle('theme-grape', theme === 'grape');
-    document.querySelectorAll('.palette-switcher a').forEach((link) => link.classList.toggle('active', link.dataset.theme === theme));
     const cards = [...document.querySelectorAll('.video-card')];
     const count = document.querySelector('#demo-count');
     document.querySelectorAll('.filter').forEach((button) => button.addEventListener('click', () => {
