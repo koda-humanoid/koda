@@ -2,3 +2,4 @@
 assets/source.mp4
 .DS_Store
 output/playwright/
+.playwright-cli/
