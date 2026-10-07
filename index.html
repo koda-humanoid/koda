@@ -42,10 +42,11 @@
       --subtitle-font-size: clamp(1.25rem, 2.4vw, 2rem);
       --title-scale: 1.5;
       --section-title-font-size: clamp(1.6rem, 3vw, 2.6rem);
+      --body-font: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { margin: 0; color: var(--ink); background: var(--paper); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--body-font); line-height: 1.55; letter-spacing: -.01em; }
     a { color: inherit; text-decoration: none; }
     img, video { display: block; max-width: 100%; }
     .wrap { width: min(calc(100% - 48px), var(--max)); margin: 0 auto; }
@@ -94,15 +95,13 @@
     .section-head { display: grid; grid-template-columns: 180px 1fr; gap: 30px; align-items: start; }
     .section h2 { max-width: 840px; margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: var(--section-title-font-size); font-weight: 500; letter-spacing: -.035em; line-height: 1.18; }
     .lead { max-width: 760px; margin: 27px 0 0 210px; color: var(--text-soft); font-size: 1.06rem; }
-    .abstract-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: start; margin-top: 54px; }
-    .abstract-copy { margin: 0; font-size: 1.2rem; line-height: 1.68; }
-    .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .stat { min-height: 102px; padding: 18px; border: 1px solid var(--line); border-radius: var(--radius); background: color-mix(in srgb, var(--white) 55%, transparent); }
-    .stat b { display: block; color: var(--accent); font-size: 1.08rem; }
-    .stat span { display: block; margin-top: 5px; color: var(--muted); font-size: .82rem; }
+    .abstract-copy { max-width: 880px; margin: 28px 0 0 210px; font-size: 1.2rem; line-height: 1.68; }
+    .overview-figure { margin-top: 42px; }
+    .overview-figure img { display: block; }
+    .overview-figure figcaption { line-height: 1.55; }
     .pipeline { margin-top: 54px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); border-radius: var(--radius); background: var(--white); box-shadow: var(--shadow); }
     .pipeline img { width: 100%; }
-    .pipeline-caption { display: flex; justify-content: space-between; gap: 20px; padding: 13px 17px; color: var(--muted); font-size: .78rem; }
+    .pipeline-caption { display: block; padding: 13px 17px 16px; color: var(--muted); font-size: .78rem; line-height: 1.55; }
     .pipeline-caption strong { color: var(--accent); }
     .method-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 54px; }
     .method-card { min-height: 220px; padding: 22px; border-radius: var(--radius); background: var(--deep); color: var(--white); }
@@ -188,7 +187,8 @@
       .section { padding: 77px 0; }
       .section-head { grid-template-columns: 1fr; gap: 16px; }
       .lead { margin-left: 0; }
-      .abstract-grid, .dataset-layout, .experiment-grid { grid-template-columns: 1fr; gap: 28px; }
+      .abstract-copy { margin-left: 0; }
+      .dataset-layout, .experiment-grid { grid-template-columns: 1fr; gap: 28px; }
       .experiment-card.wide { grid-column: auto; }
       .experiment-metrics { grid-template-columns: repeat(2, 1fr); }
       .method-grid { grid-template-columns: repeat(2, 1fr); }
@@ -198,8 +198,6 @@
       .bar-row { grid-template-columns: 118px 1fr 42px; }
       .metric-pair { grid-template-columns: 1fr; }
       .modality-grid { grid-template-columns: repeat(2, 1fr); }
-      .stat-grid { gap: 8px; }
-      .stat { padding: 14px; }
       footer .wrap { flex-direction: column; }
     }
   </style>
@@ -256,15 +254,16 @@
     <section id="abstract" class="section reveal">
       <div class="section-head wrap"><div class="eyebrow">01 / Abstract</div><h2>Turn egocentric demonstrations into controller-ready whole-body behavior.</h2></div>
       <div class="wrap">
+        <figure class="figure-card overview-figure"><img src="assets/figures/overview.png" alt="Overview of KODA, from egocentric human data through whole-body motion and robot onboard view generation to controller-specific VLA training data"><figcaption><strong>Figure 1 Overview of KODA.</strong> Whole-Body Motion Generation produces simulation-feasible whole-body motion from human egocentric demonstrations, and Robot Onboard View Generation synthesizes motion-aligned onboard views. The motion, views, and task instruction form a reusable canonical record. Control Command Generation uses this record to generate controller-specific states and actions. The resulting data are combined with matching real-robot demonstrations to co-train a controller-specific vision–language–action (VLA) policy for language-guided humanoid loco-manipulation.</figcaption></figure>
         <p class="lead">KODA closes the interface gap between what a person sees and does during a demonstration and what a humanoid controller needs at training time.</p>
-        <div class="abstract-grid"><p class="abstract-copy">We align human visual observations, head and hand motion cues, robot states, compatible actions, and task language on one control clock. The result is a reusable data conversion layer that can supplement different target controllers without rebuilding the model prior from scratch.</p><div class="stat-grid"><div class="stat"><b>Egocentric input</b><span>RGB, head pose, and hand signals</span></div><div class="stat"><b>Whole-body output</b><span>States and actions in the target interface</span></div><div class="stat"><b>Aligned records</b><span>Observation, action, and instruction together</span></div><div class="stat"><b>4 G1 tasks</b><span>Evaluated across cup, basket, and parcel tasks</span></div></div></div>
+        <p class="abstract-copy">We align human visual observations, head and hand motion cues, robot states, compatible actions, and task language on one control clock. The result is a reusable data conversion layer that can supplement different target controllers without rebuilding the model prior from scratch.</p>
       </div>
     </section>
 
     <section id="method" class="section reveal">
       <div class="section-head wrap"><div class="eyebrow">02 / Method</div><h2>A four-step conversion path keeps the data traceable.</h2></div>
       <div class="wrap"><p class="lead">The central design choice is to make the conversion explicit: every aligned record can be inspected from source observation through controller-specific actions.</p>
-        <div class="pipeline"><img src="assets/figures/pipeline.png" alt="KODA pipeline from human data through whole-body motion, robot onboard view generation, and controller-specific VLA data"><div class="pipeline-caption"><strong>FIG. 01 · KODA conversion and controller-specific instantiation</strong><span>Human prior → robot-compatible record → policy fine-tuning</span></div></div>
+        <div class="pipeline"><img src="assets/figures/pipeline.png" alt="KODA pipeline from human data through whole-body motion, robot onboard view generation, and controller-specific VLA data"><div class="pipeline-caption"><strong>Figure 2 KODA pipeline.</strong> Middle: Human demonstrations become aligned whole-body motion and onboard observations, then controller-specific state–action data for VLA training (Control Command Generation). Top: Whole-Body Motion Generation combines hand estimation and contact-aware retargeting, sampling-based command optimization (SCO), and arm refinement. Bottom: Robot Onboard View Generation combines arm removal, scene reprojection, robot rendering, depth compositing, and inpainting. Input depth is observed or estimated from RGB.</div></div>
         <div class="method-grid"><article class="method-card"><div class="num">01 · CAPTURE</div><h3>Observe the task</h3><p>Record the human viewpoint, hand and head cues, and language goal with the demonstration.</p></article><article class="method-card"><div class="num">02 · CONVERT</div><h3>Recover whole-body motion</h3><p>Map visual motion into robot motion and robot views while preserving the original task context.</p></article><article class="method-card"><div class="num">03 · ALIGN</div><h3>Instantiate the interface</h3><p>Project states and actions onto the target controller’s compatible action space and control clock.</p></article><article class="method-card"><div class="num">04 · TRAIN</div><h3>Fine-tune the policy</h3><p>Combine KODA records with robot demonstrations to train a controller-specific whole-body VLA.</p></article></div>
         <div class="method-note">Every training record keeps robot observations, whole-body states, compatible actions, and task instruction together so later debugging can follow the same path as training.</div>
       </div>
