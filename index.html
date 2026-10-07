@@ -38,6 +38,10 @@
       --max: 1180px;
       --radius: 20px;
       --shadow: 0 20px 50px rgba(35, 17, 45, .15);
+      /* 字号设置：副标题字号、KODA 相对倍数、章节标题字号。 */
+      --subtitle-font-size: clamp(1.25rem, 2.4vw, 2rem);
+      --title-scale: 1.5;
+      --section-title-font-size: clamp(1.6rem, 3vw, 2.6rem);
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -47,7 +51,7 @@
     .wrap { width: min(calc(100% - 48px), var(--max)); margin: 0 auto; }
     .site-header { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--paper) 88%, transparent); border-bottom: 1px solid var(--line); backdrop-filter: blur(16px); }
     .nav { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { display: inline-flex; align-items: center; gap: 10px; font-size: .86rem; font-weight: 800; letter-spacing: .18em; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 0.5rem; font-weight: 800; letter-spacing: .18em; }
     .brand-mark { width: 13px; height: 13px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
     .nav-links { display: flex; gap: 22px; color: var(--muted); font-size: .82rem; }
     .nav-links a:hover { color: var(--accent); }
@@ -62,8 +66,8 @@
     .hero-top { display: flex; align-items: center; justify-content: center; gap: 24px; }
     .kicker, .eyebrow { color: var(--hero-kicker); font-size: .73rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
     .status { border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 7px 12px; color: var(--hero-text); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
-    .hero h1 { margin: 30px 0 14px; font-size: clamp(5rem, 15vw, 10.5rem); line-height: .8; letter-spacing: -.085em; font-weight: 850; }
-    .subtitle { max-width: 820px; margin: 0 auto; color: var(--hero-text); font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.25rem, 2.4vw, 2rem); line-height: 1.22; }
+    .hero h1 { margin: 30px 0 14px; font-size: calc(var(--subtitle-font-size) * var(--title-scale)); line-height: 1.1; letter-spacing: -.04em; font-weight: 850; }
+    .subtitle { max-width: 820px; margin: 0 auto; color: var(--hero-text); font-family: Georgia, "Times New Roman", serif; font-size: var(--subtitle-font-size); line-height: 1.22; }
     .authors { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 12px 28px; margin: 30px 0 0; color: var(--white); font-size: 1.08rem; }
     .author { display: inline-block; white-space: nowrap; }
     .author-name { font-weight: 500; }
@@ -76,16 +80,19 @@
     .button { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 0 17px; border: 1px solid rgba(255,255,255,.4); border-radius: 999px; color: var(--white); font-size: .83rem; font-weight: 700; transition: transform .2s ease, background .2s ease; }
     .button:hover { transform: translateY(-2px); background: rgba(255,255,255,.12); }
     .button.primary { border-color: var(--button-bg); background: var(--button-bg); color: var(--button-text); }
-    .institution-row { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 48px; }
+    .institution-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px; margin-top: 48px; }
     .logo-card { display: flex; align-items: center; justify-content: center; height: 72px; min-height: 0; padding: 8px 15px; border: 1px solid rgba(255,255,255,.22); border-radius: 12px; background: rgba(255,255,255,.94); }
     .logo-card.gamma { width: 180px; }
     .logo-card.teleai { width: 64px; padding: 8px; }
     .logo-card.gamma img { width: auto; max-width: 100%; height: 44px; object-fit: contain; }
     .logo-card.teleai img { width: 44px; height: 44px; object-fit: contain; }
+    .logo-card.sjtu { width: 240px; padding: 0 10px; }
+    /* The official SJTU asset includes clear space around the emblem and wordmark. */
+    .logo-card.sjtu img { width: auto; max-width: 100%; height: 70px; object-fit: contain; }
     main { overflow: hidden; }
     .section { padding: 108px 0; border-bottom: 1px solid var(--line); }
     .section-head { display: grid; grid-template-columns: 180px 1fr; gap: 30px; align-items: start; }
-    .section h2 { max-width: 840px; margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.2rem, 5vw, 4.3rem); font-weight: 500; letter-spacing: -.05em; line-height: 1.04; }
+    .section h2 { max-width: 840px; margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: var(--section-title-font-size); font-weight: 500; letter-spacing: -.035em; line-height: 1.18; }
     .lead { max-width: 760px; margin: 27px 0 0 210px; color: var(--text-soft); font-size: 1.06rem; }
     .abstract-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: start; margin-top: 54px; }
     .abstract-copy { margin: 0; font-size: 1.2rem; line-height: 1.68; }
@@ -122,6 +129,37 @@
     .video-card-body { padding: 16px 18px 18px; }
     .video-card h3 { margin: 0; font-size: 1rem; }
     .video-card p { margin: 5px 0 0; color: var(--muted); font-size: .84rem; }
+    .experiment-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 50px; }
+    .experiment-metric { min-height: 142px; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+    .experiment-metric b { display: block; color: var(--accent); font-family: Georgia, serif; font-size: 2rem; font-weight: 500; letter-spacing: -.04em; line-height: 1; }
+    .experiment-metric strong { display: block; margin-top: 14px; color: var(--ink); font-size: .86rem; }
+    .experiment-metric span { display: block; margin-top: 4px; color: var(--muted); font-size: .77rem; }
+    .experiment-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 15px; margin-top: 15px; }
+    .experiment-card { overflow: hidden; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+    .experiment-card.wide { grid-column: 1 / -1; }
+    .experiment-card h3 { margin: 0; font-size: 1.08rem; }
+    .experiment-card > p { margin: 6px 0 0; color: var(--muted); font-size: .82rem; }
+    .chart-wrap { margin-top: 18px; overflow: hidden; border-radius: 14px; background: var(--paper); }
+    .chart-wrap svg { display: block; width: 100%; height: auto; }
+    .chart-legend { display: flex; flex-wrap: wrap; gap: 12px 20px; margin-top: 14px; color: var(--muted); font-size: .78rem; }
+    .legend-item { display: inline-flex; align-items: center; gap: 7px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .legend-dot.heft { background: var(--deep-3); }
+    .results-table { width: 100%; margin-top: 18px; border-collapse: collapse; font-size: .78rem; }
+    .results-table th, .results-table td { padding: 9px 8px; border-bottom: 1px solid var(--line); text-align: right; }
+    .results-table th:first-child, .results-table td:first-child { text-align: left; }
+    .results-table th { color: var(--muted); font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .results-table td strong { color: var(--accent); }
+    .bar-list { display: grid; gap: 13px; margin-top: 20px; }
+    .bar-row { display: grid; grid-template-columns: 145px 1fr 48px; gap: 9px; align-items: center; color: var(--text-soft); font-size: .78rem; }
+    .bar-track { height: 10px; overflow: hidden; border-radius: 99px; background: var(--paper-2); }
+    .bar-fill { height: 100%; border-radius: inherit; background: var(--accent); }
+    .bar-fill.secondary { background: var(--deep-3); }
+    .experiment-note { margin-top: 18px; padding: 14px 16px; border-left: 3px solid var(--note-border); color: var(--text-soft); background: var(--note-bg); font-size: .8rem; }
+    .metric-pair { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
+    .metric-pair div { padding: 14px; border-radius: 14px; background: var(--paper); }
+    .metric-pair b { display: block; color: var(--accent); font-size: 1.04rem; }
+    .metric-pair span { display: block; margin-top: 5px; color: var(--muted); font-size: .75rem; }
     .dataset-layout { display: grid; grid-template-columns: 1.08fr .92fr; gap: 34px; align-items: start; margin-top: 54px; }
     .figure-card { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); box-shadow: 0 12px 32px rgba(14,39,86,.08); }
     .figure-card img { width: 100%; }
@@ -150,11 +188,15 @@
       .section { padding: 77px 0; }
       .section-head { grid-template-columns: 1fr; gap: 16px; }
       .lead { margin-left: 0; }
-      .abstract-grid, .dataset-layout { grid-template-columns: 1fr; gap: 28px; }
+      .abstract-grid, .dataset-layout, .experiment-grid { grid-template-columns: 1fr; gap: 28px; }
+      .experiment-card.wide { grid-column: auto; }
+      .experiment-metrics { grid-template-columns: repeat(2, 1fr); }
       .method-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 560px) {
       .method-grid, .video-grid { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 118px 1fr 42px; }
+      .metric-pair { grid-template-columns: 1fr; }
       .modality-grid { grid-template-columns: repeat(2, 1fr); }
       .stat-grid { gap: 8px; }
       .stat { padding: 14px; }
@@ -166,25 +208,32 @@
   <header class="site-header">
     <nav class="nav wrap" aria-label="Primary navigation">
       <a class="brand" href="#top"><span class="brand-mark"></span>KODA</a>
-      <div class="nav-links"><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#results">Results</a><a href="#dataset">Dataset</a><a href="#citation">Citation</a></div>
+      <div class="nav-links"><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#video">Video</a><a href="#results">Results</a><a href="#experiments">Experiments</a><a href="#dataset">Dataset</a><a href="#citation">Citation</a></div>
     </nav>
   </header>
 
   <div id="top" class="hero">
-    <div class="hero-media"><div class="hero-video"><video autoplay muted loop playsinline preload="metadata" aria-label="KODA paired demonstration"><source src="assets/koda-data/task_3.mp4" type="video/mp4">Your browser does not support the video tag.</video><span class="hero-video-label">TEASER · KODA DATA</span></div></div>
+    <div class="hero-media"><div class="hero-video"><video autoplay muted loop playsinline preload="metadata" aria-label="KODA overview film"><source src="assets/featured/koda-v2-no-voice.mp4" type="video/mp4">Your browser does not support the video tag.</video><span class="hero-video-label">TEASER · KODA OVERVIEW</span></div></div>
     <div class="hero-inner wrap">
       <!-- <div class="hero-top"><div class="kicker">Project page · 2026</div><div class="status">GitHub Pages ready</div></div> -->
       <h1>KODA</h1>
       <p class="subtitle">Kinematics–Observation Data Alignment for Humanoid Learning from Human Egocentric Demonstration</p>
-      <!-- Placeholder authors and affiliation assignments; replace once the author list is confirmed. -->
+      <!-- Add author affiliation superscripts once the assignments are confirmed. -->
       <p class="authors" aria-label="Authors">
-        <span class="author"><span class="author-name">Author 1</span><sup aria-label="Affiliations 1 and 2">1,2</sup></span>
-        <span class="author"><span class="author-name">Author 2</span><sup aria-label="Affiliation 1">1</sup></span>
-        <span class="author"><span class="author-name">Author 3</span><sup aria-label="Affiliation 2">2</sup></span>
+        <span class="author"><span class="author-name">Zibo Zhou</span><sup>1,2,3</sup></span>
+        <span class="author"><span class="author-name">Yueru Chen</span><sup>1,2,3</sup></span>
+        <span class="author"><span class="author-name">Junsong Wu</span><sup>1,2,3</sup></span>
+        <span class="author"><span class="author-name">Weiji Xie</span><sup>1,2,3</sup></span>
+        <span class="author"><span class="author-name">Qingyao Xu</span><sup>3</sup></span>
+        <span class="author"><span class="author-name">Sheng Yin</span><sup>3</sup></span>
+        <span class="author"><span class="author-name">Siheng Chen</span><sup>3</sup></span><br>
+        <span class="author"><span class="author-name">Chenjia Bai</span><sup>1,2*</sup></span>
+        <span class="author"><span class="author-name">Xuelong Li</span><sup>1,2*</sup></span>
       </p>
       <p class="affiliations" aria-label="Author affiliations">
         <span class="affiliation"><sup>1</sup>Gamma Robotics</span>
         <span class="affiliation"><sup>2</sup>TeleAI</span>
+        <span class="affiliation"><sup>3</sup>Shanghai Jiao Tong University</span>
       </p>
       <div class="hero-actions">
         <!-- <a class="button primary" href="#abstract">Explore the project ↓</a> -->
@@ -194,7 +243,12 @@
         <a class="button" href="#">Paper</a>
         <a class="button" href="#">Arxiv</a>
       </div>
-      <div class="institution-row" aria-label="Affiliations"><div class="logo-card gamma"><img src="assets/gamma.png" alt="Gamma Robotics"></div><div class="logo-card teleai"><img src="assets/teleai.png" alt="TeleAI"></div></div>
+      <div class="institution-row" aria-label="Affiliations">
+        <div class="logo-card gamma"><img src="assets/gamma.png" alt="Gamma Robotics"></div>
+        <div class="logo-card teleai"><img src="assets/teleai.png" alt="TeleAI"></div>
+        <!-- Official SJTU logo: https://vi.sjtu.edu.cn/index.php/articles/bulletin/13 -->
+        <div class="logo-card sjtu"><img src="assets/sjtu.png" alt="Shanghai Jiao Tong University"></div>
+      </div>
     </div>
   </div>
 
@@ -216,25 +270,92 @@
       </div>
     </section>
 
+
+    <section id="video" class="section reveal">
+      <div class="section-head wrap"><div class="eyebrow">03 / Video</div><h2>A short film for the KODA story.</h2></div>
+      <div class="wrap"><p class="lead">This paper film introduces the motivation, conversion path, and controller-specific supervision behind KODA.</p>
+        <div class="media-frame"><video controls preload="metadata" aria-label="KODA paper film"><source src="assets/featured/koda-paper-film.mp4" type="video/mp4">Your browser does not support the video tag.</video><div class="media-caption"><span>KODA · paper film</span><span>3:04 · 1920 × 1080</span></div></div>
+      </div>
+    </section>
+
+
     <section id="results" class="section reveal">
-      <div class="section-head wrap"><div class="eyebrow">03 / Results</div><h2>Browse the same task from human intent to robot execution.</h2></div>
-      <div class="wrap"><p class="lead">The clips below use the KODA data material from the project workspace. Each demo shows a paired human view and a robot-side execution or replay across the four G1 tasks evaluated with SONIC and HEFT.</p>
-        <div class="media-frame"><video controls preload="metadata"><source src="assets/koda-data/task_3.mp4" type="video/mp4">Your browser does not support the video tag.</video><div class="media-caption"><span>KODA · featured paired demonstration</span><span>11.3 s · 1920 × 1080</span></div></div>
-        <div class="demo-toolbar"><div class="filters" role="group" aria-label="Filter demos"><button class="filter active" data-filter="all">All 4</button><button class="filter" data-filter="manipulation">Manipulation</button><button class="filter" data-filter="transfer">Transfer</button></div><span class="demo-count" id="demo-count">Showing 4 demonstrations</span></div>
-        <div class="video-grid" id="demo-grid"><article class="video-card" data-kind="manipulation"><video controls muted loop preload="metadata"><source src="assets/koda-data/task_1.mp4" type="video/mp4"></video><div class="video-card-body"><h3>Task 01 · Pick and place</h3><p>Egocentric intent aligned with a whole-body reach and place.</p></div></article><article class="video-card" data-kind="transfer"><video controls muted loop preload="metadata"><source src="assets/koda-data/task_2.mp4" type="video/mp4"></video><div class="video-card-body"><h3>Task 02 · Container transfer</h3><p>Object transfer with synchronized hand and robot views.</p></div></article><article class="video-card" data-kind="manipulation"><video controls muted loop preload="metadata"><source src="assets/koda-data/task_3.mp4" type="video/mp4"></video><div class="video-card-body"><h3>Task 03 · Surface interaction</h3><p>Contact-rich action grounded in a controller-compatible trajectory.</p></div></article><article class="video-card" data-kind="transfer"><video controls muted loop preload="metadata"><source src="assets/koda-data/task_4.mp4" type="video/mp4"></video><div class="video-card-body"><h3>Task 04 · Rearrangement</h3><p>Multi-step rearrangement with the task instruction retained.</p></div></article></div>
+      <div class="section-head wrap"><div class="eyebrow">04 / Results</div><h2>Browse the data demos and controller rollouts.</h2></div>
+      <div class="wrap"><p class="lead">The short-form library is grouped by role: data processing clips, canonical KODA records, and successful rollouts from the SONIC and HEFT whole-body controllers.</p>
+        <div class="demo-toolbar"><div class="filters" role="group" aria-label="Filter videos"><button class="filter active" data-filter="all">All 20</button><button class="filter" data-filter="data">Data demos · 8</button><button class="filter" data-filter="koda">KODA · 4</button><button class="filter" data-filter="sonic">SONIC · 4</button><button class="filter" data-filter="heft">HEFT · 4</button></div><span class="demo-count" id="demo-count">Showing 20 videos</span></div>
+        <div class="video-grid" id="demo-grid"><article class="video-card" data-kind="data"><video controls autoplay muted loop playsinline preload="metadata" aria-label="Data demo 01 · Processing clip"><source src="assets/video/short-zh/data-demo-01.mp4" type="video/mp4"></video><div class="video-card-body"><h3>Data demo 01 · Processing clip</h3><p>Short visualization of the KODA data processing and alignment pipeline.</p></div></article><article class="video-card" data-kind="data"><video controls autoplay muted loop playsinline preload="metadata" aria-label="Data demo 02 · Processing clip"><source src="assets/video/short-zh/data-demo-02.mp4" type="video/mp4"></video><div class="video-card-body"><h3>Data demo 02 · Processing clip</h3><p>Short visualization of the KODA data processing and alignment pipeline.</p></div></article><article class="video-card" data-kind="data"><video controls autoplay muted loop playsinline preload="metadata" aria-label="Data demo 03 · Processing clip"><source src="assets/video/short-zh/data-demo-03.mp4" type="video/mp4"></video><div class="video-card-body"><h3>Data demo 03 · Processing clip</h3><p>Short visualization of the KODA data processing and alignment pipeline.</p></div></article><article class="video-card" data-kind="data"><video controls autoplay muted loop playsinline preload="metadata" aria-label="Data demo 04 · Processing clip"><source src="assets/video/short-zh/data-demo-04.mp4" type="video/mp4"></video><div class="video-card-body"><h3>Data demo 04 · Processing clip</h3><p>Short visualization of the KODA data processing and alignment pipeline.</p></div></article><article class="video-card" data-kind="data"><video controls autoplay muted loop playsinline preload="metadata" aria-label="Data demo 05 · Processing clip"><source src="assets/video/short-zh/data-demo-05.mp4" type="video/mp4"></video><div class="video-card-body"><h3>Data demo 05 · Processing clip</h3><p>Short visualization of the KODA data processing and alignment pipeline.</p></div></article><article class="video-card" data-kind="data"><video controls autoplay muted loop playsinline preload="metadata" aria-label="Data demo 06 · Processing clip"><source src="assets/video/short-zh/data-demo-06.mp4" type="video/mp4"></video><div class="video-card-body"><h3>Data demo 06 · Processing clip</h3><p>Short visualization of the KODA data processing and alignment pipeline.</p></div></article><article class="video-card" data-kind="data"><video controls autoplay muted loop playsinline preload="metadata" aria-label="Data demo 07 · Processing clip"><source src="assets/video/short-zh/data-demo-07.mp4" type="video/mp4"></video><div class="video-card-body"><h3>Data demo 07 · Processing clip</h3><p>Short visualization of the KODA data processing and alignment pipeline.</p></div></article><article class="video-card" data-kind="data"><video controls autoplay muted loop playsinline preload="metadata" aria-label="Data demo 08 · Processing clip"><source src="assets/video/short-zh/data-demo-08.mp4" type="video/mp4"></video><div class="video-card-body"><h3>Data demo 08 · Processing clip</h3><p>Short visualization of the KODA data processing and alignment pipeline.</p></div></article><article class="video-card" data-kind="koda"><video controls autoplay muted loop playsinline preload="metadata" aria-label="KODA canonical · Task 01 · Pick and place"><source src="assets/video/short-zh/koda-task-1.mp4" type="video/mp4"></video><div class="video-card-body"><h3>KODA canonical · Task 01 · Pick and place</h3><p>Canonical KODA record for whole-body reach and placement.</p></div></article><article class="video-card" data-kind="koda"><video controls autoplay muted loop playsinline preload="metadata" aria-label="KODA canonical · Task 02 · Container transfer"><source src="assets/video/short-zh/koda-task-2.mp4" type="video/mp4"></video><div class="video-card-body"><h3>KODA canonical · Task 02 · Container transfer</h3><p>Canonical KODA record for object transfer with synchronized hand and robot views.</p></div></article><article class="video-card" data-kind="koda"><video controls autoplay muted loop playsinline preload="metadata" aria-label="KODA canonical · Task 03 · Surface interaction"><source src="assets/video/short-zh/koda-task-3.mp4" type="video/mp4"></video><div class="video-card-body"><h3>KODA canonical · Task 03 · Surface interaction</h3><p>Canonical KODA record for contact-rich action grounded in a controller-compatible trajectory.</p></div></article><article class="video-card" data-kind="koda"><video controls autoplay muted loop playsinline preload="metadata" aria-label="KODA canonical · Task 04 · Rearrangement"><source src="assets/video/short-zh/koda-task-4.mp4" type="video/mp4"></video><div class="video-card-body"><h3>KODA canonical · Task 04 · Rearrangement</h3><p>Canonical KODA record for multi-step rearrangement with the task instruction retained.</p></div></article><article class="video-card" data-kind="sonic"><video controls autoplay muted loop playsinline preload="metadata" aria-label="SONIC rollout · Task 01 · Pick and place"><source src="assets/video/short-zh/sonic-success-task-1.mp4" type="video/mp4"></video><div class="video-card-body"><h3>SONIC rollout · Task 01 · Pick and place</h3><p>Successful whole-body controller rollout for whole-body reach and placement.</p></div></article><article class="video-card" data-kind="sonic"><video controls autoplay muted loop playsinline preload="metadata" aria-label="SONIC rollout · Task 02 · Container transfer"><source src="assets/video/short-zh/sonic-success-task-2.mp4" type="video/mp4"></video><div class="video-card-body"><h3>SONIC rollout · Task 02 · Container transfer</h3><p>Successful whole-body controller rollout for object transfer with synchronized hand and robot views.</p></div></article><article class="video-card" data-kind="sonic"><video controls autoplay muted loop playsinline preload="metadata" aria-label="SONIC rollout · Task 03 · Surface interaction"><source src="assets/video/short-zh/sonic-success-task-3.mp4" type="video/mp4"></video><div class="video-card-body"><h3>SONIC rollout · Task 03 · Surface interaction</h3><p>Successful whole-body controller rollout for contact-rich action grounded in a controller-compatible trajectory.</p></div></article><article class="video-card" data-kind="sonic"><video controls autoplay muted loop playsinline preload="metadata" aria-label="SONIC rollout · Task 04 · Rearrangement"><source src="assets/video/short-zh/sonic-success-task-4.mp4" type="video/mp4"></video><div class="video-card-body"><h3>SONIC rollout · Task 04 · Rearrangement</h3><p>Successful whole-body controller rollout for multi-step rearrangement with the task instruction retained.</p></div></article><article class="video-card" data-kind="heft"><video controls autoplay muted loop playsinline preload="metadata" aria-label="HEFT rollout · Task 01 · Pick and place"><source src="assets/video/short-zh/heft-success-task-1.mp4" type="video/mp4"></video><div class="video-card-body"><h3>HEFT rollout · Task 01 · Pick and place</h3><p>Successful whole-body controller rollout for whole-body reach and placement.</p></div></article><article class="video-card" data-kind="heft"><video controls autoplay muted loop playsinline preload="metadata" aria-label="HEFT rollout · Task 02 · Container transfer"><source src="assets/video/short-zh/heft-success-task-2.mp4" type="video/mp4"></video><div class="video-card-body"><h3>HEFT rollout · Task 02 · Container transfer</h3><p>Successful whole-body controller rollout for object transfer with synchronized hand and robot views.</p></div></article><article class="video-card" data-kind="heft"><video controls autoplay muted loop playsinline preload="metadata" aria-label="HEFT rollout · Task 03 · Surface interaction"><source src="assets/video/short-zh/heft-success-task-3.mp4" type="video/mp4"></video><div class="video-card-body"><h3>HEFT rollout · Task 03 · Surface interaction</h3><p>Successful whole-body controller rollout for contact-rich action grounded in a controller-compatible trajectory.</p></div></article><article class="video-card" data-kind="heft"><video controls autoplay muted loop playsinline preload="metadata" aria-label="HEFT rollout · Task 04 · Rearrangement"><source src="assets/video/short-zh/heft-success-task-4.mp4" type="video/mp4"></video><div class="video-card-body"><h3>HEFT rollout · Task 04 · Rearrangement</h3><p>Successful whole-body controller rollout for multi-step rearrangement with the task instruction retained.</p></div></article></div>
+      </div>
+    </section>
+
+
+    <section id="experiments" class="section reveal">
+      <div class="section-head wrap"><div class="eyebrow">05 / Experiments</div><h2>Human demonstrations expand whole-body policy coverage.</h2></div>
+      <div class="wrap">
+        <p class="lead">KODA is evaluated on a Unitree G1 with BrainCo hands across four loco-manipulation tasks. The same canonical records are reused to train both SONIC and HEFT policies with fixed robot data.</p>
+        <div class="experiment-metrics">
+          <div class="experiment-metric"><b>+45.0 pp</b><strong>SONIC Robot-OOD</strong><span>3.75% → 48.75% with 100 KODA demos</span></div>
+          <div class="experiment-metric"><b>+46.25 pp</b><strong>HEFT Robot-OOD</strong><span>5.00% → 51.25% with 100 KODA demos</span></div>
+          <div class="experiment-metric"><b>4</b><strong>Whole-body tasks</strong><span>Cup, parcel, basket, and drawer tasks</span></div>
+          <div class="experiment-metric"><b>20</b><strong>Real-robot trials</strong><span>Per task and condition</span></div>
+        </div>
+        <div class="experiment-grid">
+          <article class="experiment-card wide">
+            <h3>Robot-OOD success scales with converted human data</h3>
+            <p>Macro-average task success under conditions covered by human demonstrations but absent from the robot demonstrations.</p>
+            <div class="chart-wrap">
+              <svg viewBox="0 0 720 300" role="img" aria-labelledby="scaling-chart-title scaling-chart-desc">
+                <title id="scaling-chart-title">Robot-OOD macro-average success versus KODA demonstrations</title>
+                <desc id="scaling-chart-desc">SONIC rises from 3.75 to 48.75 percent and HEFT rises from 5 to 51.25 percent as converted human demonstrations increase from zero to one hundred per task.</desc>
+                <rect width="720" height="300" fill="#f4f1ea"/>
+                <g stroke="#211729" stroke-opacity=".12" stroke-width="1">
+                  <line x1="70" y1="238" x2="675" y2="238"/><line x1="70" y1="188" x2="675" y2="188"/><line x1="70" y1="138" x2="675" y2="138"/><line x1="70" y1="88" x2="675" y2="88"/><line x1="70" y1="38" x2="675" y2="38"/>
+                </g>
+                <g fill="#716774" font-family="Inter, sans-serif" font-size="12">
+                  <text x="48" y="242">0</text><text x="40" y="192">15</text><text x="40" y="142">30</text><text x="40" y="92">45</text><text x="40" y="42">60</text>
+                  <text x="66" y="264">0</text><text x="190" y="264">25</text><text x="310" y="264">50</text><text x="430" y="264">75</text><text x="548" y="264">100</text>
+                  <text x="70" y="286">Converted human demonstrations per task</text><text x="10" y="20">Success (%)</text>
+                </g>
+                <polyline points="70,225.5 191,183.8 312,158.8 433,100.5 554,75.5" fill="none" stroke="#7a4ba3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="70,221.3 191,171.3 312,133.8 433,88 554,67.2" fill="none" stroke="#56316d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <g fill="#7a4ba3" stroke="#f4f1ea" stroke-width="3"><circle cx="70" cy="225.5" r="6"/><circle cx="191" cy="183.8" r="6"/><circle cx="312" cy="158.8" r="6"/><circle cx="433" cy="100.5" r="6"/><circle cx="554" cy="75.5" r="6"/></g>
+                <g fill="#56316d" stroke="#f4f1ea" stroke-width="3"><circle cx="70" cy="221.3" r="6"/><circle cx="191" cy="171.3" r="6"/><circle cx="312" cy="133.8" r="6"/><circle cx="433" cy="88" r="6"/><circle cx="554" cy="67.2" r="6"/></g>
+              </svg>
+            </div>
+            <div class="chart-legend"><span class="legend-item"><span class="legend-dot"></span>SONIC · 3.75 → 48.75%</span><span class="legend-item"><span class="legend-dot heft"></span>HEFT · 5.00 → 51.25%</span></div>
+            <table class="results-table"><thead><tr><th>KODA demos / task</th><th>SONIC OOD</th><th>HEFT OOD</th><th>SONIC ID</th><th>HEFT ID</th></tr></thead><tbody><tr><td>0</td><td>3.75%</td><td>5.00%</td><td>62.50%</td><td>68.75%</td></tr><tr><td>25</td><td>16.25%</td><td>20.00%</td><td>68.75%</td><td>66.25%</td></tr><tr><td>50</td><td>23.75%</td><td>31.25%</td><td>70.00%</td><td>68.75%</td></tr><tr><td>75</td><td>41.25%</td><td>45.00%</td><td>71.25%</td><td>72.50%</td></tr><tr><td>100</td><td><strong>48.75%</strong></td><td><strong>51.25%</strong></td><td><strong>72.50%</strong></td><td><strong>76.25%</strong></td></tr></tbody></table>
+          </article>
+          <article class="experiment-card">
+            <h3>Observation alignment</h3>
+            <p>SONIC Robot-OOD macro-average success across the four alignment variants.</p>
+            <div class="bar-list"><div class="bar-row"><span>No alignment</span><span class="bar-track"><span class="bar-fill" style="width:38.5%"></span></span><b>18.75%</b></div><div class="bar-row"><span>Fixed offset</span><span class="bar-track"><span class="bar-fill" style="width:48.7%"></span></span><b>23.75%</b></div><div class="bar-row"><span>Motion reprojection</span><span class="bar-track"><span class="bar-fill secondary" style="width:76.9%"></span></span><b>37.50%</b></div><div class="bar-row"><span>Full alignment</span><span class="bar-track"><span class="bar-fill" style="width:100%"></span></span><b>48.75%</b></div></div>
+            <table class="results-table"><thead><tr><th>Variant</th><th>Robot-ID</th><th>Robot-OOD</th></tr></thead><tbody><tr><td>No alignment</td><td>62.50%</td><td>18.75%</td></tr><tr><td>Fixed offset</td><td>63.75%</td><td>23.75%</td></tr><tr><td>Motion reprojection</td><td>66.25%</td><td>37.50%</td></tr><tr><td>Full alignment</td><td><strong>72.50%</strong></td><td><strong>48.75%</strong></td></tr></tbody></table>
+          </article>
+          <article class="experiment-card">
+            <h3>Controller-specific command optimization</h3>
+            <p>Sampling-based command optimization (SCO) improves both in-distribution and out-of-distribution execution.</p>
+            <div class="metric-pair"><div><b>48.75 → 72.50%</b><span>Robot-ID macro-average</span></div><div><b>7.50 → 48.75%</b><span>Robot-OOD macro-average</span></div><div><b>+41.25 pp</b><span>Robot-OOD gain</span></div></div>
+            <div class="experiment-note">Without SCO, canonical motion is used directly as the tracking reference. With SCO, the controller-specific commands are optimized before recording state-action supervision.</div>
+          </article>
+          <article class="experiment-card wide">
+            <h3>Motion fidelity and controller trackability</h3>
+            <p>Lower is better. Position is reported in centimeters and orientation in radians.</p>
+            <table class="results-table"><thead><tr><th>Stage / target</th><th>Direct</th><th>SCO</th><th>SCO + IK</th></tr></thead><tbody><tr><td>Whole-body generation · Wrist position / orientation</td><td>15.02 cm / 0.2046 rad</td><td>3.03 cm / 0.1106 rad</td><td><strong>0.33 cm / 0.0296 rad</strong></td></tr><tr><td>SONIC rollout · Wrist position / orientation</td><td>61.50 cm / 0.1777 rad</td><td><strong>2.88 cm / 0.1292 rad</strong></td><td>—</td></tr><tr><td>HEFT rollout · Wrist position / orientation</td><td>19.61 cm / 0.0677 rad</td><td><strong>2.94 cm / 0.0552 rad</strong></td><td>—</td></tr></tbody></table>
+          </article>
+        </div>
+        <div class="experiment-note">Experimental protocol from the paper: 50 robot demonstrations and up to 100 converted human demonstrations per task; one training run per configuration; 20 real-robot trials per task and condition; macro-averages weight the four tasks equally.</div>
       </div>
     </section>
 
     <section id="dataset" class="section reveal">
-      <div class="section-head wrap"><div class="eyebrow">04 / Dataset</div><h2>Each record carries the signals a whole-body policy needs.</h2></div>
+      <div class="section-head wrap"><div class="eyebrow">06 / Dataset</div><h2>Each record carries the signals a whole-body policy needs.</h2></div>
       <div class="wrap"><p class="lead">KODA makes the data processing chain visible: source demonstrations become aligned records, then controller-specific training data.</p>
         <div class="dataset-layout"><figure class="figure-card"><img src="assets/figures/data-record.png" alt="An aligned KODA training record contains robot observations, whole-body states, compatible actions, and task instruction"><figcaption>FIG. 02 · One training record is paired on a single control clock.</figcaption></figure><div><div class="data-list"><div class="data-row"><div class="num">01</div><div><h3>Robot observations</h3><p>Onboard RGB and the visual context available to the target policy.</p></div></div><div class="data-row"><div class="num">02</div><div><h3>Whole-body states</h3><p>Body joints, gravity, and hand state expressed in the target embodiment.</p></div></div><div class="data-row"><div class="num">03</div><div><h3>Compatible actions</h3><p>Commands projected into the controller’s action space for execution.</p></div></div><div class="data-row"><div class="num">04</div><div><h3>Task instruction</h3><p>The language goal that keeps the record usable for instruction following.</p></div></div></div><div class="modality-grid"><div class="modality"><b>Egocentric RGB</b><span>Human viewpoint</span></div><div class="modality"><b>Head + hands</b><span>Motion cues</span></div><div class="modality"><b>Robot state</b><span>Whole-body status</span></div><div class="modality"><b>Action tokens</b><span>Controller commands</span></div><div class="modality"><b>Instruction</b><span>Language goal</span></div><div class="modality"><b>Control clock</b><span>Aligned timestamps</span></div></div></div></div>
       </div>
     </section>
 
-    <section id="citation" class="section citation reveal"><div class="section-head wrap"><div class="eyebrow">05 / Citation</div><h2>Keep the project easy to reference.</h2></div><div class="wrap"><p class="lead">Replace the author list and venue once the paper metadata is final.</p><pre class="citation-box">@article{koda2026,
+    <section id="citation" class="section citation reveal"><div class="section-head wrap"><div class="eyebrow">07 / Citation</div><h2>Keep the project easy to reference.</h2></div><div class="wrap"><p class="lead">Citation details will be updated once the paper metadata is final.</p><pre class="citation-box">@article{koda2026,
   title   = {KODA: Kinematics--Observation Data Alignment for Humanoid Learning},
-  author  = {Shi, Jiyuan and the KODA Team},
+  author  = {Zibo Zhou and Yueru Chen and Junsong Wu and Weiji Xie and Qingyao Xu and Sheng Yin and Siheng Chen and Chenjia Bai},
   year    = {2026},
   note    = {Project page}
 }</pre></div></section>
@@ -244,13 +365,18 @@
   <script>
     const cards = [...document.querySelectorAll('.video-card')];
     const count = document.querySelector('#demo-count');
+    const autoplayVideoObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.play().catch(() => {});
+      else entry.target.pause();
+    }), { threshold: .25 });
+    document.querySelectorAll('.video-card video').forEach((video) => autoplayVideoObserver.observe(video));
     document.querySelectorAll('.filter').forEach((button) => button.addEventListener('click', () => {
       document.querySelectorAll('.filter').forEach((item) => item.classList.remove('active'));
       button.classList.add('active');
       const filter = button.dataset.filter;
       let visible = 0;
       cards.forEach((card) => { const show = filter === 'all' || card.dataset.kind === filter; card.classList.toggle('hidden', !show); if (show) visible += 1; });
-      count.textContent = `Showing ${visible} demonstration${visible === 1 ? '' : 's'}`;
+      count.textContent = `Showing ${visible} video${visible === 1 ? '' : 's'}`;
     }));
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add('visible'); }), { threshold: .08 });
     document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
